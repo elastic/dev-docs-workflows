@@ -9,6 +9,9 @@ on:
         type: string
       repo: 
         type: string
+      subdirectory:
+        type: string
+        default: '.'
     secrets:
       VERCEL_GITHUB_TOKEN:
         description: 'A GitHub PAT with repo scope'
@@ -80,18 +83,18 @@ jobs:
           mkdir -p ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}
           rm -rf ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}/*
           rsync --ignore-missing-args -zavpm --no-l \
-          --include='*.docnav.json' \
-          --include='*.apidocs.json' \
-          --include='*.mdx' \
-          --include='*.png' \
-          --include='*.gif' \
-          --include='*.jpg' \
-          --include='*.svg' \
-          --include='*.jpeg' \
-          --include='*.webp' \
-          --include='*.devdocs.json' \
-          --include='*/' \
-          --exclude='*' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.docnav.json' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.apidocs.json' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.mdx' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.png' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.gif' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.jpg' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.svg' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.jpeg' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.webp' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*.devdocs.json' \
+          --include='${{ INPUT_SUBDIRECTORY }}/*/' \
+          --exclude='${{ INPUT_SUBDIRECTORY }}/*' \
           ${{ github.workspace }}/tmp/ \
           ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}/
 
