@@ -94,7 +94,7 @@ jobs:
           --include='${{ github.event.inputs.subdirectory }}/*.webp' \
           --include='${{ github.event.inputs.subdirectory }}/*.devdocs.json' \
           --include='${{ github.event.inputs.subdirectory }}/*/' \
-          --exclude='${{ github.event.inputs.subdirectory }}/*' \
+          --exclude='*' \
           ${{ github.workspace }}/tmp/ \
           ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}/
 
