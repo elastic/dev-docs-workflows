@@ -83,17 +83,17 @@ jobs:
           mkdir -p ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}
           rm -rf ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}/*
           rsync --ignore-missing-args -zavpm --no-l \
-          --include='${{ github.event.inputs.subdirectory }}/*.docnav.json' \
-          --include='${{ github.event.inputs.subdirectory }}/*.apidocs.json' \
-          --include='${{ github.event.inputs.subdirectory }}/*.mdx' \
-          --include='${{ github.event.inputs.subdirectory }}/*.png' \
-          --include='${{ github.event.inputs.subdirectory }}/*.gif' \
-          --include='${{ github.event.inputs.subdirectory }}/*.jpg' \
-          --include='${{ github.event.inputs.subdirectory }}/*.svg' \
-          --include='${{ github.event.inputs.subdirectory }}/*.jpeg' \
-          --include='${{ github.event.inputs.subdirectory }}/*.webp' \
-          --include='${{ github.event.inputs.subdirectory }}/*.devdocs.json' \
-          --include='${{ github.event.inputs.subdirectory }}/*/' \
+          --include='*.docnav.json' \
+          --include='*.apidocs.json' \
+          --include='*.mdx' \
+          --include='*.png' \
+          --include='*.gif' \
+          --include='*.jpg' \
+          --include='*.svg' \
+          --include='*.jpeg' \
+          --include='*.webp' \
+          --include='*.devdocs.json' \
+          --include='*/' \
           --exclude='*' \
           ${{ github.workspace }}/tmp/ \
           ${{ github.workspace }}/wordlake/${{ github.event.repository.name }}/
