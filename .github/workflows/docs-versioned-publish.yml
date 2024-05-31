@@ -5,10 +5,13 @@ on:
     inputs:
       prebuild:
         type: string
+        required: true
       project-name:
         type: string
-      repo:
+        required: true
+      site-repo:
         type: string
+        required: true
     secrets:
       VERCEL_GITHUB_TOKEN:
         description: 'A GitHub PAT with repo scope'
@@ -55,9 +58,9 @@ jobs:
       - name: Checkout essential repos
         uses: actions/checkout@v4
         with:
-          repository: elastic/${{ inputs.repo }}
+          repository: elastic/${{ inputs.site-repo }}
           token: ${{ secrets.VERCEL_GITHUB_TOKEN }}
-          path: ${{ github.workspace }}/${{ inputs.repo }}
+          path: ${{ github.workspace }}/${{ inputs.site-repo }}
           persist-credentials: false
 
       - name: Checkout ${{ inputs.prebuild }}
@@ -78,7 +81,7 @@ jobs:
         uses: ./workflows/.github/actions/version-content
         with:
           prebuild: ${{ inputs.prebuild }}
-          site-repo: ${{ inputs.repo }}
+          site-repo: ${{ inputs.site-repo }}
           content-repo: ${{ github.repository }}
           base-ref: ${{ github.base_ref }}
           workspace: ${{ github.workspace }}
@@ -89,7 +92,7 @@ jobs:
         run: |
             mkdir ${{ github.workspace }}/build/
             mv ${{ github.workspace }}/${{ inputs.prebuild }} ${{ github.workspace }}/build/
-            mv ${{ github.workspace }}/${{ inputs.repo }} ${{ github.workspace }}/build/
+            mv ${{ github.workspace }}/${{ inputs.site-repo }} ${{ github.workspace }}/build/
 
       - name: Generate preview
         if: github.event.pull_request.merged != true && github.event.pull_request.closed != true
