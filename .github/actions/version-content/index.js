@@ -58,9 +58,10 @@ try {
       'Unable to find docsmobile.config.js in the site repository.'
     )
   }
-  
-  console.log('• config', config)
+
   const { sources, versioning } = config
+  console.log('• sources', sources)
+  console.log('• CONTENT_REPO', CONTENT_REPO)
   const { directories } = sources.find(({ repo }) => repo === CONTENT_REPO)
 
   directories.forEach(async ({ versioningSystem, path: contentPath }) => {
