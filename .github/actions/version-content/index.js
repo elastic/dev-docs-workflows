@@ -53,7 +53,6 @@ try {
 
   if (fs.existsSync(configPath)) {
     config = require(configPath)
-    console.log('!!!config', config)
   } else {
     throw new Error(
       'Unable to find docsmobile.config.js in the site repository.'
@@ -61,9 +60,6 @@ try {
   }
 
   const { sources, versioning } = config
-  console.log('Object.keys(sources)', Object.keys(sources))
-  console.log('sources', sources)
-  console.log('versioning', versioning)
   const { directories } = sources.find(({ repo }) => repo === CONTENT_REPO)
 
   directories.forEach(async ({ versioningSystem, path: contentPath }) => {
