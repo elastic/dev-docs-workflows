@@ -108,6 +108,12 @@ jobs:
           github-token: ${{ secrets.VERCEL_GITHUB_TOKEN }} #Optional
           github-comment: true # Otherwise need github-token (VERCEL_GITHUB_TOKEN)
 
+      - name: Debug - Print PR Details
+        run: |
+          echo "PR Merged: ${{ github.event.pull_request.merged }}"
+          echo "Base Branch: ${{ github.event.pull_request.base.ref }}"
+          echo "Versions: ${{ env.VERSIONS }}"
+
       - name: Portal for deploy
         if: github.event.pull_request.merged == true && contains(fromJson(env.VERSIONS), github.event.pull_request.base.ref)
         shell: bash
