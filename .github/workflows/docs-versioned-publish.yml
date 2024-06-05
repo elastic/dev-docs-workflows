@@ -113,6 +113,7 @@ jobs:
           echo "PR Merged: ${{ github.event.pull_request.merged }}"
           echo "Base Branch: ${{ github.event.pull_request.base.ref }}"
           echo "Versions: ${{ env.VERSIONS }}"
+          echo "Portal condition: ${{ github.event.pull_request.merged == true && contains(fromJson(env.VERSIONS), github.event.pull_request.base.ref) }}"
 
       - name: Portal for deploy
         if: github.event.pull_request.merged == true && contains(fromJson(env.VERSIONS), github.event.pull_request.base.ref)
