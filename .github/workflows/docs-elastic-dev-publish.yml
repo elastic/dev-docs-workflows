@@ -35,13 +35,24 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Get ref
+        id: get_ref
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let ref = `${{ github.event.merge_group.head_ref }}`;
+            if (!ref) {
+              ref = `refs/pull/${{ github.event.number }}/head`
+            }
+            core.setOutput('ref', ref);
+
       - name: Checkout branch into temp
         if: github.event.action != 'closed' && github.event.pull_request.merged != true
         uses: actions/checkout@v4
         with:
           path: 'tmp'
           fetch-depth: 2
-          ref: refs/pull/${{ github.event.number }}/head
+          ref: ${{ steps.get_ref.outputs.ref }}
           persist-credentials: false
 
       - name: Prepare content for deploy
