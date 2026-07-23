@@ -54,6 +54,7 @@ jobs:
           fetch-depth: 2
           ref: ${{ steps.get_ref.outputs.ref }}
           persist-credentials: false
+          allow-unsafe-pr-checkout: true
 
       - name: Prepare content for deploy
         if: ${{ github.event.pull_request.merged }}
